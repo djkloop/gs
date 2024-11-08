@@ -1,0 +1,80 @@
+syntax = "proto3";
+
+package api.v1.cms;
+
+import "google/api/annotations.proto";
+
+option go_package = "content_manage/api/v1/cms;cms";
+option java_multiple_files = true;
+option java_package = "api.v1.cms";
+
+service Content {
+	rpc CreateContent (CreateContentRequest) returns (CreateContentReply) {
+		option (google.api.http) = {
+			post: "/v1/cms/content/create"
+			body: "*"
+		};
+	};
+	rpc UpdateContent (UpdateContentRequest) returns (UpdateContentReply) {
+		option (google.api.http) = {
+			post: "/v1/cms/content/update"
+			body: "*"
+		};
+	};
+	rpc DeleteContent (DeleteContentRequest) returns (DeleteContentReply);
+	rpc GetContent (GetContentRequest) returns (GetContentReply);
+	rpc ListContent (ListContentRequest) returns (ListContentReply);
+}
+
+message ContentDetail {
+	// 内容id
+	int64 id = 1;
+	// 内容标题
+	string title = 2;
+	// 内容描述
+	string description = 3;
+	// 视频播放URL
+	string video_url = 4;
+	// 作者
+	string author = 5;
+	// 封面图URL
+	string thumbnail = 6;
+	// 内容分类
+	string category = 7;
+	// 内容时长
+	int64 duration = 8;
+	// 分辨率
+	string resolution = 9;
+	// 文件大小
+	int64 file_size = 10;
+	// 视频格式
+	string format = 11;
+	// 视频质量
+	int32 quality = 12;
+	// 审核状态
+	int32  approval_status = 13;
+}
+
+message CreateContentRequest {
+	ContentDetail content = 1;
+}
+message CreateContentReply {
+	string message = 1;
+}
+
+message UpdateContentRequest {
+	ContentDetail content = 1;
+}
+message UpdateContentReply {
+	string message = 1;
+	int64 id = 2;
+}
+
+message DeleteContentRequest {}
+message DeleteContentReply {}
+
+message GetContentRequest {}
+message GetContentReply {}
+
+message ListContentRequest {}
+message ListContentReply {}

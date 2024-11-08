@@ -1,0 +1,150 @@
+# Generated with protoc-gen-openapi
+# https://github.com/google/gnostic/tree/master/cmd/protoc-gen-openapi
+
+openapi: 3.0.3
+info:
+    title: Content API
+    version: 0.0.1
+paths:
+    /v1/cms/content/create:
+        post:
+            tags:
+                - Content
+            operationId: Content_CreateContent
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/CreateContentRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CreateContentReply'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /v1/cms/content/update:
+        post:
+            tags:
+                - Content
+            operationId: Content_UpdateContent
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/UpdateContentRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/UpdateContentReply'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+components:
+    schemas:
+        ContentDetail:
+            type: object
+            properties:
+                id:
+                    type: string
+                    description: 内容id
+                title:
+                    type: string
+                    description: 内容标题
+                description:
+                    type: string
+                    description: 内容描述
+                videoUrl:
+                    type: string
+                    description: 视频播放URL
+                author:
+                    type: string
+                    description: 作者
+                thumbnail:
+                    type: string
+                    description: 封面图URL
+                category:
+                    type: string
+                    description: 内容分类
+                duration:
+                    type: string
+                    description: 内容时长
+                resolution:
+                    type: string
+                    description: 分辨率
+                fileSize:
+                    type: string
+                    description: 文件大小
+                format:
+                    type: string
+                    description: 视频格式
+                quality:
+                    type: integer
+                    description: 视频质量
+                    format: int32
+                approvalStatus:
+                    type: integer
+                    description: 审核状态
+                    format: int32
+        CreateContentReply:
+            type: object
+            properties:
+                message:
+                    type: string
+        CreateContentRequest:
+            type: object
+            properties:
+                content:
+                    $ref: '#/components/schemas/ContentDetail'
+        GoogleProtobufAny:
+            type: object
+            properties:
+                '@type':
+                    type: string
+                    description: The type of the serialized message.
+            additionalProperties: true
+            description: Contains an arbitrary serialized message along with a @type that describes the type of the serialized message.
+        Status:
+            type: object
+            properties:
+                code:
+                    type: integer
+                    description: The status code, which should be an enum value of [google.rpc.Code][google.rpc.Code].
+                    format: int32
+                message:
+                    type: string
+                    description: A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the [google.rpc.Status.details][google.rpc.Status.details] field, or localized by the client.
+                details:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/GoogleProtobufAny'
+                    description: A list of messages that carry the error details.  There is a common set of message types for APIs to use.
+            description: 'The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). Each `Status` message contains three pieces of data: error code, error message, and error details. You can find out more about this error model and how to work with it in the [API Design Guide](https://cloud.google.com/apis/design/errors).'
+        UpdateContentReply:
+            type: object
+            properties:
+                message:
+                    type: string
+                id:
+                    type: string
+        UpdateContentRequest:
+            type: object
+            properties:
+                content:
+                    $ref: '#/components/schemas/ContentDetail'
+tags:
+    - name: Content
